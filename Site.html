@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тапалка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 20px;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:active {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button id="tapButton">Нажми на меня!</button>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tapCount = 0;
+        const button = document.getElementById('tapButton');
+
+        // Ловим нажатие на кнопку
+        button.addEventListener('click', () => {
+            tapCount++;
+            button.textContent = `Ты нажал ${tapCount} раз(а)!`;
+
+            // Можно отправить данные в бота через Telegram Web Apps SDK
+            Telegram.WebApp.sendData(JSON.stringify({ taps: tapCount }));
+        });
+
+        // Инициализация Telegram Web Apps
+        Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
